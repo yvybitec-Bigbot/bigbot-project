@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BigBot Wiki: a simple guide to the project</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/bigbot-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <a class="brand" href="#top"><img src="assets/bigbot-icon.png" alt="">BigBot Wiki</a>
+  <ol>
+    <li><a href="#what">What is BigBot?</a></li>
+    <li><a href="#status">Status at a glance</a></li>
+    <li><a href="#tree">The project tree</a></li>
+    <li><a href="#token">BIGBOT token</a></li>
+    <li><a href="#armor">Vault Armor (basic armor)</a></li>
+    <li><a href="#dispenser">The 369 dispenser</a></li>
+    <li><a href="#reserve">Reserve and refill</a></li>
+    <li><a href="#nfts">NFTs: buy, claim, unwrap</a></li>
+    <li><a href="#bbg">BBG and its armor vault</a></li>
+    <li><a href="#platinum">BigBot Platinum</a></li>
+    <li><a href="#gui">Part 3: the GUI</a></li>
+    <li><a href="#contracts">Contract addresses</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ol>
+  <div class="navnote">Draft guide, last updated 6 October 2026. Anything marked <b>Testnet</b>, <b>Design</b> or <b>Planned</b> is not live on PulseChain mainnet.</div>
+</nav>
+
+<main id="top">
+<header class="hero">
+  <div>
+    <h1>BigBot: armor for bot treasuries</h1>
+    <p class="lead">BigBot is a small project on PulseChain built around one idea: bots that hold tokens should be able to protect them. The BIGBOT token is the key, the Vault Armor is the shield, and the newer pieces (NFTs, BBG and the portal) add ways to use, burn and lock BIGBOT.</p>
+    <p>This page is an entry point. It explains each piece in plain words so anyone arriving can get oriented. It is not a full technical spec, and a short presentation will follow later.</p>
+    <div class="draftbar">Draft for review. Not financial advice. Nothing here is a promise of price, profit or return.</div>
+  </div>
+  <figure class="media">
+    <video src="assets/medallion.mp4#t=4.5" poster="assets/medallion-poster.jpg" autoplay muted loop playsinline></video>
+    <figcaption>The BigBot medallion</figcaption>
+  </figure>
+</header>
+
+<section id="what">
+  <h2>What is BigBot?</h2>
+  <p>BigBot started as a tool for bots and AI agents. Bots often keep their funds in a single hot wallet, so if that wallet's key leaks, everything can be drained at once. BigBot's answer is a <b>Vault Armor</b>: a contract that holds the bot's tokens and only lets them out through a slower, controlled path, using BIGBOT as the signal that "arms" a withdrawal.</p>
+  <p>Although the project is aimed at bots, the protection idea works for anyone who wants their tokens behind an extra lock.</p>
+  <div class="cards">
+    <div class="card"><h4>BIGBOT (BB)</h4><p>The project token on PulseChain. Fixed supply, 6 decimals.</p></div>
+    <div class="card"><h4>Vault Armor</h4><p>The shield. A contract wallet with separate roles, delays and a fixed exit.</p></div>
+    <div class="card"><h4>369 NFTs and BBG</h4><p>The "luxury armor": NFTs that wrap and burn BIGBOT, and BBG, the key to a locked vault.</p></div>
+    <div class="card"><h4>The portal</h4><p>A planned web app where users see and manage all of this from their own wallet.</p></div>
+  </div>
+</section>
+
+<section id="status">
+  <h2>Status at a glance</h2>
+  <p class="sub">Every part of the project carries one of these labels throughout the guide.</p>
+  <table>
+    <tr><th>Piece</th><th>Status</th><th>Where</th></tr>
+    <tr><td>BIGBOT token</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 22 Sep 2026)</td></tr>
+    <tr><td>BIGBOT dispenser v1 (1,000 PLS per BIGBOT)</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 27 Sep 2026)</td></tr>
+    <tr><td>Vault Armor v2 factory (burn version)</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 27 Sep 2026)</td></tr>
+    <tr><td>BIGBOT/PLS pool</td><td><span class="badge b-live">Live</span></td><td>PulseX V2 (since 28 Sep 2026)</td></tr>
+    <tr><td>Dispenser v2, 369 NFTs, BBG, BBG armor vault</td><td><span class="badge b-test">Testnet</span></td><td>PulseChain Testnet V4 only (deployed 2 Oct 2026, 51/51 local and 43/43 on-chain tests passed)</td></tr>
+    <tr><td>BigBot Platinum (portal key)</td><td><span class="badge b-design">Design</span></td><td>Not deployed anywhere yet</td></tr>
+    <tr><td>Part 3: the GUI / portal</td><td><span class="badge b-plan">Planned</span></td><td>To be built and tested against Testnet V4 first</td></tr>
+  </table>
+  <div class="note warn">Nothing from the Testnet, Design or Planned rows exists on mainnet. Testnet tokens have no value. Mainnet launch of those pieces needs final checks and approval first.</div>
+</section>
+
+<section id="tree">
+  <h2>The project tree</h2>
+  <p class="sub">BigBot grows in three parts, each one built on the last. The third part is the bridge that connects the first two.</p>
+  <div class="tree">
+    <ul>
+      <li><span class="root">BigBot</span>
+        <ul>
+          <li><span class="node">Part 1: Basic armor</span> <span class="badge b-live">Live</span><br><span class="desc">The original goal: protect a bot's tokens.</span>
+            <ul>
+              <li><span class="node">BIGBOT token</span> <span class="desc">the key and signal for the armor</span></li>
+              <li><span class="node">Vault Armor</span> <span class="desc">contract wallet with separate roles, delays, caps and a fixed exit</span></li>
+              <li><span class="node">Dispenser v1</span> <span class="desc">sells BIGBOT for PLS at a fixed price that can only go up</span></li>
+              <li><span class="node">BIGBOT/PLS pool</span> <span class="desc">small PulseX V2 pool</span></li>
+            </ul>
+          </li>
+          <li><span class="node">Part 2: Luxury armor</span> <span class="badge b-test">Testnet</span><br><span class="desc">NFTs and burning, to use BIGBOT and move its market a little.</span>
+            <ul>
+              <li><span class="node">Dispenser v2</span> <span class="desc">minimum buy of 369 BIGBOT, each 369 gives one claim right</span></li>
+              <li><span class="node">Claim reserve</span> <span class="desc">pays for each NFT claim and is refilled by vault releases</span></li>
+              <li><span class="node">369 NFT (BigBot Capsule)</span> <span class="desc">holds 369 BIGBOT; claim, unwrap with 3, or fuse 6</span></li>
+              <li><span class="node">BBG (BigBot Gold)</span> <span class="desc">made by fusing 6 NFTs; the key to an armor vault</span>
+                <ul><li><span class="node">BBG armor vault</span> <span class="desc">locks everything except PLS; release with 369 BIGBOT</span></li></ul>
+              </li>
+            </ul>
+          </li>
+          <li><span class="node">Part 3: The GUI / portal</span> <span class="badge b-plan">Planned</span><br><span class="desc">One web app that connects Parts 1 and 2 for the user.</span>
+            <ul>
+              <li><span class="node">BigBot Platinum</span> <span class="badge b-design">Design</span> <span class="desc">the key to enter the portal</span></li>
+              <li><span class="node">Dashboard and actions</span> <span class="desc">see balances, NFTs, BBG and vaults; sign actions from your own wallet</span></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="token">
+  <h2>BIGBOT token <span class="badge b-live">Live</span></h2>
+  <p class="sub">The base of everything else. Often shortened to <b>BB</b>.</p>
+  <table>
+    <tr><th>Name</th><td>BigBot</td></tr>
+    <tr><th>Ticker</th><td>BIGBOT</td></tr>
+    <tr><th>Network</th><td>PulseChain mainnet (chain ID 369)</td></tr>
+    <tr><th>Contract</th><td><code>0xeb6F7B997c0020f5C0334815d9BEAAB661bCfEf6</code><br><a href="https://scan.pulsechain.com/address/0xeb6F7B997c0020f5C0334815d9BEAAB661bCfEf6" target="_blank" rel="noopener">View on PulseScan</a></td></tr>
+    <tr><th>Standard</th><td>ERC-20 (plain: transfer, approve, balance; no mint function)</td></tr>
+    <tr><th>Decimals</th><td>6</td></tr>
+    <tr><th>Total supply</th><td>8,315,002,026 BIGBOT, fixed at deployment</td></tr>
+    <tr><th>Source code</th><td>Verified on-chain</td></tr>
+  </table>
+  <h3>Why 369?</h3>
+  <p>The number 369 runs through the whole project: PulseChain's chain ID is 369, the dispenser's minimum buy is 369 BIGBOT, each NFT holds 369 BIGBOT, and releasing a BBG vault costs 369 BIGBOT.</p>
+  <div class="note">Always check the contract address, not just the name or ticker. Anyone can create a token with a similar name.</div>
+</section>
+
+<section id="armor">
+  <h2>Vault Armor (basic armor) <span class="badge b-live">Live</span></h2>
+  <p class="sub">Part 1: the shield for a bot's treasury.</p>
+  <p>A Vault Armor is a contract that <b>is</b> the wallet. Instead of one key that can do everything, it splits power between roles, so a single stolen key is not enough to empty it.</p>
+  <ul>
+    <li><b>Operator</b>: the bot's everyday (hot) key. It can deposit, and it can withdraw only after a withdrawal has been armed.</li>
+    <li><b>Key master</b>: a separate key that "arms" a withdrawal by paying a BIGBOT signal.</li>
+    <li><b>Delay and caps</b>: after arming there can be a waiting time, and each arming allows only a limited share of the funds.</li>
+    <li><b>Fixed exit</b>: withdrawals only go to an exit address chosen when the vault is created.</li>
+    <li><b>Decoy trap</b>: "emergency" style functions that an attacker might try send the funds to a safe trap address instead.</li>
+  </ul>
+  <p>The version live on mainnet (v2) burns BIGBOT: creating a vault through the factory burns 50 BIGBOT, and each vault can be set to burn BIGBOT every time a withdrawal is armed. The factory has no owner and no admin functions.</p>
+  <div class="note warn">Honest limit: a Vault Armor cannot protect funds if one person controls both the operator key and the key master key at the same time.</div>
+</section>
+
+<section id="dispenser">
+  <h2>The 369 BigBot dispenser</h2>
+  <p class="sub">A simple contract that sells BIGBOT for PLS at a set price, with no order book and no pool.</p>
+  <h3>Dispenser v1 <span class="badge b-live">Live</span></h3>
+  <ul>
+    <li>Price: 1,000 PLS per BIGBOT.</li>
+    <li>Maximum per address: 369 BIGBOT.</li>
+    <li>Maximum per day, for everyone together: 20,000 BIGBOT.</li>
+    <li>The price can only go up, never down.</li>
+    <li>Stocked with 369,000 BIGBOT on 27 Sep 2026.</li>
+  </ul>
+  <h3>Dispenser v2 <span class="badge b-test">Testnet</span></h3>
+  <p>The new version links buying to the NFTs.</p>
+  <ol class="steps">
+    <li>You buy <b>at least 369 BIGBOT</b>. Smaller purchases are rejected.</li>
+    <li>Every full 369 BIGBOT you buy gives you <b>one claim right</b> (for example, 738 gives two).</li>
+    <li>You use a claim right to claim a 369 NFT, paying only the gas yourself (see <a href="#nfts">NFTs</a>).</li>
+  </ol>
+  <div class="note warn">Testnet settings are not the final product settings. On testnet the price is 1 PLS per BIGBOT and the per-address limit is 3,690, only so the tests fit a test budget. The product price stays at 1,000 PLS per BIGBOT. Final mainnet limits will be confirmed before launch.</div>
+</section>
+
+<section id="reserve">
+  <h2>The reserve and refill system <span class="badge b-test">Testnet</span></h2>
+  <p class="sub">Where the BIGBOT for the NFTs comes from, and how it flows back.</p>
+  <p>Dispenser v2 keeps two separate pots of BIGBOT inside the same contract:</p>
+  <div class="cards">
+    <div class="card"><h4>Sale stock</h4><p>BIGBOT that buyers can purchase with PLS.</p></div>
+    <div class="card"><h4>Claim reserve</h4><p>BIGBOT set aside only for NFT claims. Buyers can't buy it, and the owner can't withdraw it.</p></div>
+  </div>
+  <h3>What each claim costs the reserve</h3>
+  <div class="flow">
+    <div class="step">Claim reserve</div><div class="arrow">gives 738 BB</div>
+    <div class="step">369 BB burned for good</div><div class="arrow">+</div>
+    <div class="step">369 BB locked inside the new NFT</div>
+  </div>
+  <h3>How it gets refilled</h3>
+  <ol class="steps">
+    <li>The owner adds BIGBOT to the dispenser and marks it as claim reserve.</li>
+    <li>Every time someone releases a BBG armor vault, they pay <b>369 BIGBOT</b>, and those tokens go <b>back to the dispenser</b> instead of being burned.</li>
+    <li>That way, vault releases help feed the next round of buys and claims.</li>
+  </ol>
+  <div class="note">How it works in the current testnet build: the 369 BIGBOT from a vault release arrive in the dispenser as free stock, and the owner then marks them as claim reserve. Whether this should happen automatically is still a design detail.</div>
+</section>
+
+<section id="nfts">
+  <h2>NFTs: buy, claim and unwrap <span class="badge b-test">Testnet</span></h2>
+  <p class="sub">The 369 NFT (testnet name "BigBot Capsule", symbol BBCAP) is an ERC-721 that holds 369 BIGBOT inside it.</p>
+  <div class="flow">
+    <div class="step">Buy 369+ BB</div><div class="arrow">then</div>
+    <div class="step">Claim 1 NFT per right (max 3)</div><div class="arrow">then</div>
+    <div class="step">Unwrap 3 together, or fuse 6 into BBG</div>
+  </div>
+  <h3>The rules</h3>
+  <table>
+    <tr><th>Rule</th><th>What it means</th></tr>
+    <tr><td>3 per wallet</td><td>A wallet can claim at most 3 NFTs and can hold at most 3 at a time. A 4th claim, or a transfer that would give a wallet a 4th, is rejected.</td></tr>
+    <tr><td>Unwrap only with 3</td><td>You can't open one NFT on its own. Unwrapping takes all 3 at once and releases 3 × 369 = <b>1,107 BIGBOT</b>.</td></tr>
+    <tr><td>Once per wallet</td><td>Each wallet can unwrap only once, even if it later collects more NFTs.</td></tr>
+    <tr><td>50% dump cap</td><td>The total amount that can ever be unwrapped is capped so that, even if everyone unwrapped and sold at once, the BIGBOT/PLS pool price could not fall by more than 50%. With a standard pool, that means at most about 41.4% of the BIGBOT sitting in the pool. The contract enforces this.</td></tr>
+    <tr><td>You pay the gas</td><td>Claiming, unwrapping and fusing are done by the user, who pays their own gas.</td></tr>
+  </table>
+  <div class="note warn">The real cap will be calculated from the live BIGBOT/PLS pool just before any mainnet launch. The testnet figure came from a made-up test pool and is not a real number.</div>
+  <h3>Fusing: 6 NFTs make 1 BBG</h3>
+  <p>Instead of unwrapping, 6 NFTs can be fused into 1 BBG. The 6 NFTs are burned, and the BIGBOT that was inside them is burned for good rather than released. Because one wallet can hold only 3, a fuse can combine NFTs from two wallets, as long as the person fusing owns them or has been approved for them.</p>
+</section>
+
+<section id="bbg">
+  <h2>BBG (BigBot Gold) and its armor vault <span class="badge b-test">Testnet</span></h2>
+  <div class="split">
+    <div>
+      <p class="sub">BBG is the "luxury armor" key. The ticker is <b>BBG</b>.</p>
+      <ul>
+        <li><b>How you get it</b>: by fusing 6 of the 369 NFTs. Each fuse makes exactly 1 BBG.</li>
+        <li><b>What it is</b>: an ERC-20 token with 0 decimals, so 1 BBG is one whole key.</li>
+        <li><b>What it does</b>: it creates an armor vault and acts as that vault's key. Creating the vault does <b>not</b> burn the BBG.</li>
+      </ul>
+      <div class="note gold">Some PulseChain NFT collections also use the letters BBG. To avoid confusion, the guide and the portal will always show BBG together with its contract address. BBG has no mainnet contract yet. The testnet build still uses the earlier working symbol BBGOLD; the mainnet ticker will be BBG.</div>
+    </div>
+    <figure class="media">
+      <video src="assets/bbg-helmet.mp4" poster="assets/helmet-poster.jpg" autoplay muted loop playsinline></video>
+      <figcaption>The armor becomes BBG</figcaption>
+    </figure>
+  </div>
+  <h3>How the BBG armor vault works</h3>
+  <ol class="steps">
+    <li><b>Create</b>: the BBG holder creates a vault and chooses an <b>exit address</b>. That address is fixed forever.</li>
+    <li><b>Locked from the start</b>: the vault begins locked. Anyone can deposit tokens into it.</li>
+    <li><b>Only PLS can leave while locked</b>, so the owner can always pay gas. Every other token stays put.</li>
+    <li><b>Release</b>: the owner sends <b>369 BIGBOT</b>. Those go back to the dispenser (see <a href="#reserve">Reserve and refill</a>) and the vault unlocks.</li>
+    <li><b>Withdraw</b>: once unlocked, tokens can only go to the fixed exit address, nowhere else.</li>
+    <li><b>Relock</b>: the owner can lock the vault again as long as they still hold at least 1 BBG.</li>
+  </ol>
+</section>
+
+<section id="platinum">
+  <h2>BigBot Platinum <span class="badge b-design">Design</span></h2>
+  <div class="split">
+    <div>
+      <p class="sub">The key to enter the Part 3 portal. Not deployed anywhere yet.</p>
+      <ul>
+        <li><b>Any amount opens the door</b>: a wallet with any Platinum balance above zero can use the portal.</li>
+        <li><b>How you get it</b>: a swap page exchanges BIGBOT for Platinum <b>1:1</b> (send 0.02 BB, receive 0.02 Platinum). The BIGBOT you send is <b>burned</b>, so every new portal user slightly reduces the BIGBOT supply.</li>
+        <li><b>No trading pool</b>: Platinum gets no PulseX pool and no market price.</li>
+        <li><b>Halves on every hop</b>: whoever receives Platinum can pass on only half of it (receive 1, send 0.5; that person can send 0.25, and so on). The rest stays as the wallet's portal key. This lets a real owner move access to a new wallet after a hack, without turning Platinum into something to speculate on. A minimum amount per transfer is planned.</li>
+      </ul>
+      <p>Without Platinum, the portal shows:</p>
+      <div class="gate"><p>You need BigBot Platinum to enter and use the portal.</p><a class="btn" href="#platinum" title="Preview only: the swap page does not exist yet">Get BigBot Platinum</a></div>
+    </div>
+    <figure class="media">
+      <img src="assets/platinum-coin.jpg" alt="BigBot Platinum coin concept art">
+      <figcaption>Platinum coin concept art</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="gui">
+  <h2>Part 3: the GUI (planned) <span class="badge b-plan">Planned</span></h2>
+  <div class="split">
+    <div>
+      <p class="sub">A web portal that connects to your own wallet and puts Parts 1 and 2 in one place. It will be built and tested against Testnet V4 before anything goes to mainnet.</p>
+      <div class="note"><b>The portal can never move your funds by itself.</b> It only reads public data from your wallet and the blockchain, and when you want to do something it prepares the transaction and asks <b>you</b> to sign it in your wallet. If you don't sign, nothing happens.</div>
+    </div>
+    <figure class="media">
+      <video src="assets/medallion-portal.mp4#t=4.5" poster="assets/portal-poster.jpg" autoplay muted loop playsinline></video>
+      <figcaption>Planned portal visual</figcaption>
+    </figure>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <h4>What you will see</h4>
+      <ul>
+        <li>Your BIGBOT balance</li>
+        <li>Your 369 NFTs (0 to 3)</li>
+        <li>Your BBG, shown with its contract address</li>
+        <li>What's inside each of your vaults</li>
+        <li>Whether each vault is locked or unlocked</li>
+        <li>Each vault's fixed exit address</li>
+        <li>Read-only info about the connected wallet, such as PLS and token balances</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>What you can do (you sign each one)</h4>
+      <ul>
+        <li>Buy BIGBOT from the dispenser</li>
+        <li>Claim NFTs</li>
+        <li>Unwrap all 3 NFTs</li>
+        <li>Fuse 6 NFTs into BBG</li>
+        <li>Create a vault with BBG</li>
+        <li>Deposit into a vault</li>
+        <li>Lock and relock a vault</li>
+        <li>Release a vault with 369 BIGBOT</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>What is fixed (nobody can change it)</h4>
+      <ul>
+        <li>A vault's exit address, once chosen</li>
+        <li>The rules: 369 minimum, 3 NFTs per wallet, unwrap only with 3 and only once, the 50% cap, 6 NFTs per BBG, 369 BIGBOT to release</li>
+        <li>The portal cannot change these rules; they live in the contracts</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Ideas being considered</h3>
+  <ul>
+    <li>Alerts: a pending NFT claim, 3 NFTs ready to unwrap, progress toward a BBG.</li>
+    <li>A safety check that warns about risky token approvals on your wallet.</li>
+    <li>A history of your purchases, claims and vault activity.</li>
+  </ul>
+</section>
+
+<section id="contracts">
+  <h2>Contract addresses</h2>
+  <p class="sub">Only public contract addresses are listed. Always compare the full address before you interact.</p>
+  <h3>PulseChain mainnet (chain ID 369) <span class="badge b-live">Live</span></h3>
+  <table>
+    <tr><th>Contract</th><th>Address</th></tr>
+    <tr><td>BIGBOT token</td><td><code>0xeb6F7B997c0020f5C0334815d9BEAAB661bCfEf6</code></td></tr>
+    <tr><td>BIGBOT dispenser v1</td><td><code>0x430c523c34B4E96afCCe6201C07Fa7e4fc6DC262</code></td></tr>
+    <tr><td>Vault Armor v2 factory</td><td><code>0xE3a62b15eCCdfbcac9bE1d616BCbEd0DF6c0Ed70</code></td></tr>
+  </table>
+  <p>Explorer: <a href="https://scan.pulsechain.com" target="_blank" rel="noopener">PulseScan</a></p>
+  <h3>PulseChain Testnet V4 (chain ID 943) <span class="badge b-test">Testnet only</span></h3>
+  <table>
+    <tr><th>Contract</th><th>Address</th></tr>
+    <tr><td>Test BIGBOT (mock, no value)</td><td><code>0xd314bC08683FbB95c2fAF9D1d231c73a8f223385</code></td></tr>
+    <tr><td>Dispenser v2</td><td><code>0x978Bd830e357a764AeCa594eF07A2C69E78b6203</code></td></tr>
+    <tr><td>369 NFT (BigBot Capsule)</td><td><code>0x94b4138Fc7748ead2Edcc5A7aAA869558Cc6a0BA</code></td></tr>
+    <tr><td>BBG (testnet symbol BBGOLD)</td><td><code>0x821D03933130cdC68B034c6B06a66848917e2d21</code></td></tr>
+    <tr><td>BBG armor vault factory</td><td><code>0x255e7dc67127311434950C0B0bb08bBafdE55093</code></td></tr>
+  </table>
+  <p>Explorer: <a href="https://scan.v4.testnet.pulsechain.com" target="_blank" rel="noopener">PulseChain Testnet V4 explorer</a></p>
+  <div class="note warn">Testnet contracts are for testing only. Mainnet addresses for Dispenser v2, the NFTs, BBG and BigBot Platinum don't exist yet. Any address claiming to be one of them should be treated as fake until it appears in an official update of this guide.</div>
+</section>
+
+<section id="glossary">
+  <h2>Glossary</h2>
+  <table>
+    <tr><td><b>BB</b></td><td>Short for BIGBOT, the project token.</td></tr>
+    <tr><td><b>PLS</b></td><td>PulseChain's native coin, used to pay gas and to buy from the dispenser.</td></tr>
+    <tr><td><b>Burn</b></td><td>Sending tokens to a dead address that nobody controls, removing them from circulation for good.</td></tr>
+    <tr><td><b>Claim right</b></td><td>Permission, earned by buying 369 BIGBOT from Dispenser v2, to claim one 369 NFT.</td></tr>
+    <tr><td><b>Unwrap</b></td><td>Opening 3 NFTs together to release the 1,107 BIGBOT inside them.</td></tr>
+    <tr><td><b>Fuse</b></td><td>Combining 6 NFTs into 1 BBG.</td></tr>
+    <tr><td><b>Exit address</b></td><td>The only address a BBG vault can send tokens to. It is chosen at creation and can't be changed.</td></tr>
+    <tr><td><b>Testnet</b></td><td>A practice copy of PulseChain where tokens have no value, used to test contracts safely.</td></tr>
+  </table>
+</section>
+
+<footer>
+  BigBot Wiki, draft of 6 October 2026. This guide describes software that is partly live and partly in testing or design. It is not financial advice, and nothing here is a promise of price, profit or return. Always verify contract addresses yourself.
+</footer>
+</main>
+</div>
+</body>
+</html>
