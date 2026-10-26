@@ -27,7 +27,7 @@
     <li><a href="#contracts">Contract addresses</a></li>
     <li><a href="#glossary">Glossary</a></li>
   </ol>
-  <div class="navnote">Draft guide, last updated 25 October 2026. Anything marked <b>Testnet</b>, <b>Design</b> or <b>Planned</b> is not live on PulseChain mainnet.</div>
+  <div class="navnote">Draft guide, last updated 26 October 2026. Anything marked <b>Testnet</b>, <b>Design</b> or <b>Planned</b> is not live on PulseChain mainnet.</div>
 </nav>
 
 <main id="top">
@@ -66,7 +66,7 @@
     <tr><td>Vault Armor v2 factory (burn version)</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 27 Sep 2026)</td></tr>
     <tr><td>BIGBOT/PLS pool</td><td><span class="badge b-live">Live</span></td><td>PulseX V2 (since 28 Sep 2026)</td></tr>
     <tr><td>Dispenser v2, 369 NFTs, BBG, BBG armor vault</td><td><span class="badge b-test">Testnet</span></td><td>PulseChain Testnet V4 only (deployed 2 Oct 2026, 51/51 local and 43/43 on-chain tests passed)</td></tr>
-    <tr><td>BigBot Platinum: token, dispenser, BB swap, dead man's switch</td><td><span class="badge b-test">Testnet</span></td><td>PulseChain Testnet V4 only (deployed 25 Oct 2026, 26/26 local tests passed). Section in Spanish below.</td></tr>
+    <tr><td>BigBot Platinum: token, dispenser, BB swap, dead man's switch</td><td><span class="badge b-test">Testnet</span></td><td>PulseChain Testnet V4 only (redeployed 26 Oct 2026 with final rules, 29/29 local tests passed). Section in Spanish below.</td></tr>
     <tr><td>Part 3: the GUI / portal</td><td><span class="badge b-plan">Planned</span></td><td>To be built and tested against Testnet V4 first</td></tr>
   </table>
   <div class="note warn">Nothing from the Testnet, Design or Planned rows exists on mainnet. Testnet tokens have no value. Mainnet launch of those pieces needs final checks and approval first.</div>
@@ -240,11 +240,11 @@
   <h2>BigBot Platinum <span class="badge b-test">Testnet</span></h2>
   <div class="split">
     <div>
-      <p class="sub">Desplegado solo en PulseChain Testnet V4 (25 oct 2026). No existe en mainnet. Los tokens de testnet no tienen valor.</p>
+      <p class="sub">Desplegado solo en PulseChain Testnet V4 (versión con las reglas finales, 26 oct 2026). No existe en mainnet. Los tokens de testnet no tienen valor.</p>
       <h3>El token</h3>
       <ul>
         <li><b>Suministro fijo: 21.000 Platinum</b>, acuñados una sola vez al desplegar. <b>No hay función de mint</b> ni dueño. 8 decimales.</li>
-        <li><b>Reparto:</b> 16.800 (80 %) al dispensador · 3.150 (15 %) al canje 1:1 con BB · 1.050 (5 %) a un timelock del proyecto (pruebas, premios y el interruptor de Carlos).</li>
+        <li><b>Reparto:</b> 16.800 (80 %) al dispensador · 3.150 (15 %) al canje 1:1 con BB · 1.050 (5 %) a un timelock del proyecto (pruebas, premios y el interruptor de Carlos), bloqueado <b>1 año</b> en mainnet.</li>
       </ul>
       <h3>El dispensador: 1 Platinum = 1.000.000 PLS</h3>
       <ul>
@@ -257,21 +257,21 @@
       <h3>El interruptor de hombre muerto (herencia)</h3>
       <ol>
         <li><b>Armar:</b> depositas <b>1 Platinum y 1 BB</b> en el contrato, eliges la wallet destino (puede estar vacía) y el plazo (por ejemplo 90 días), y das <i>approve</i> al contrato de los tokens ERC20 que quieres proteger. Los tokens siguen en tu wallet.</li>
-        <li><b>Definitivo:</b> mientras está armado <b>no se puede cambiar</b> ni el destino ni el plazo, y <b>no existe función de desarme</b>. Sí puedes añadir más tokens a proteger.</li>
-        <li><b>Latido:</b> <code>heartbeat()</code> reinicia el contador. Mientras des señales de vida, no pasa nada.</li>
-        <li><b>Disparo:</b> si vence el plazo sin latido, cualquiera puede llamar a <code>trigger()</code>, que solo anota el bloque.</li>
+        <li><b>Definitivo:</b> el destino, el plazo y la lista de tokens protegidos quedan <b>fijados al armar</b>: no se pueden cambiar ni ampliar, y <b>no existe función de desarme</b>. El plazo mínimo en mainnet es de <b>90 días</b>. <b>Un solo interruptor por wallet, para siempre</b>: esa wallet no puede volver a armar otro, ni siquiera después de la liberación.</li>
+        <li><b>Latido:</b> <code>heartbeat()</code> reinicia el contador. Mientras des señales de vida antes de que venza el plazo, no pasa nada.</li>
+        <li><b>Disparo:</b> si vence el plazo sin latido, cualquiera puede llamar a <code>trigger()</code>, que solo anota el bloque. <b>Una vez disparado no se puede detener</b>: el latido ya no funciona.</li>
         <li><b>Liberación:</b> tras <b>369 bloques confirmados</b> (aprox. una hora), cualquiera llama a <code>release()</code> y en una sola transacción: se quema el BB depositado, se transfieren a la wallet destino los tokens protegidos que sigan en tu wallet (hasta lo aprobado) y se envía el Platinum depositado a la wallet destino.</li>
       </ol>
-      <div class="note warn"><b>Limitaciones:</b> el PLS nativo no se protege (usa WPLS). Si revocas un approve o vacías la wallet, no hay nada que mover: es un sistema de permisos, no una caja fuerte. Si te roban la clave, el ladrón también puede dar latidos. Un latido durante la espera de 369 bloques cancela el disparo. En testnet el plazo mínimo es 60 segundos para poder probarlo; en mainnet será mayor.</div>
+      <div class="note warn"><b>Limitaciones:</b> el PLS nativo no se protege (usa WPLS). Si revocas un approve o vacías la wallet, no hay nada que mover: es un sistema de permisos, no una caja fuerte. Si te roban la clave, el ladrón también puede dar latidos. No se puede proteger el propio Platinum, y el destino no puede ser tu propia wallet ni la dirección muerta. Si un token protegido falla al transferirse, se salta y el resto de la liberación continúa. <b>Solo en testnet</b> el plazo mínimo es de 60 segundos y el timelock de 1 hora, para poder probarlo.</div>
       <h3>Direcciones en Testnet V4 (chain ID 943)</h3>
       <table>
         <tr><th>Contrato</th><th>Dirección</th></tr>
-    <tr><td>BigBot Platinum (token, 8 decimales)</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xC6481EA669B8F6c141c6F4707BD841F39a433288" target="_blank" rel="noopener"><code>0xC6481EA669B8F6c141c6F4707BD841F39a433288</code></a></td></tr>
-    <tr><td>Dispensador de Platinum</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0x956C10c23EB17b77a526D9d247c068629A71f03E" target="_blank" rel="noopener"><code>0x956C10c23EB17b77a526D9d247c068629A71f03E</code></a></td></tr>
-    <tr><td>Canje 1:1 BB → Platinum</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0x73bE6A1F8c1b5425015cbb2a34193D2B14d281C3" target="_blank" rel="noopener"><code>0x73bE6A1F8c1b5425015cbb2a34193D2B14d281C3</code></a></td></tr>
-    <tr><td>Timelock del proyecto (5 %)</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xA3edFbFE5eCe298d8E265655688C6f8b38a1a607" target="_blank" rel="noopener"><code>0xA3edFbFE5eCe298d8E265655688C6f8b38a1a607</code></a></td></tr>
-    <tr><td>Interruptor de hombre muerto</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xB974D70059790b0a0C067411b7b83b95fFa5035a" target="_blank" rel="noopener"><code>0xB974D70059790b0a0C067411b7b83b95fFa5035a</code></a></td></tr>
-    <tr><td>BB de prueba (mock, sin valor)</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0x743da053218445Fc9C10ad1D6a37C901954cE469" target="_blank" rel="noopener"><code>0x743da053218445Fc9C10ad1D6a37C901954cE469</code></a></td></tr>
+    <tr><td>BigBot Platinum (token, 8 decimales)</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0x54F18236039E84Cf229D06e001f7266d22C2D73c" target="_blank" rel="noopener"><code>0x54F18236039E84Cf229D06e001f7266d22C2D73c</code></a></td></tr>
+    <tr><td>Dispensador de Platinum</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xd17e710CbC5F8c5B8a57A1B19A7EFc2Bbe3F2Fbb" target="_blank" rel="noopener"><code>0xd17e710CbC5F8c5B8a57A1B19A7EFc2Bbe3F2Fbb</code></a></td></tr>
+    <tr><td>Canje 1:1 BB → Platinum</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xFa338f4ff73470E4d7418Bfe9fe5E2f96Ca38CA5" target="_blank" rel="noopener"><code>0xFa338f4ff73470E4d7418Bfe9fe5E2f96Ca38CA5</code></a></td></tr>
+    <tr><td>Timelock del proyecto (5 %)</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xCBF266c91Df21DA66347D8cCfa753584EA38cfAC" target="_blank" rel="noopener"><code>0xCBF266c91Df21DA66347D8cCfa753584EA38cfAC</code></a></td></tr>
+    <tr><td>Interruptor de hombre muerto</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0x2be2D373169dED0CC8433aAD8227493576E0c4F8" target="_blank" rel="noopener"><code>0x2be2D373169dED0CC8433aAD8227493576E0c4F8</code></a></td></tr>
+    <tr><td>BB de prueba (mock, sin valor)</td><td><a href="https://scan.v4.testnet.pulsechain.com/#/address/0xF6380BE95f60Bc2232659f134B4f3186F664e93a" target="_blank" rel="noopener"><code>0xF6380BE95f60Bc2232659f134B4f3186F664e93a</code></a></td></tr>
       </table>
       <p class="sub">Estos contratos aún necesitan revisión externa antes de cualquier despliegue en mainnet.</p>
     </div>
@@ -356,12 +356,12 @@
     <tr><td>369 NFT (BigBot Capsule)</td><td><code>0x94b4138Fc7748ead2Edcc5A7aAA869558Cc6a0BA</code></td></tr>
     <tr><td>BBG (testnet symbol BBGOLD)</td><td><code>0x821D03933130cdC68B034c6B06a66848917e2d21</code></td></tr>
     <tr><td>BBG armor vault factory</td><td><code>0x255e7dc67127311434950C0B0bb08bBafdE55093</code></td></tr>
-    <tr><td>BigBot Platinum</td><td><code>0xC6481EA669B8F6c141c6F4707BD841F39a433288</code></td></tr>
-    <tr><td>Platinum dispenser</td><td><code>0x956C10c23EB17b77a526D9d247c068629A71f03E</code></td></tr>
-    <tr><td>BB → Platinum 1:1 swap</td><td><code>0x73bE6A1F8c1b5425015cbb2a34193D2B14d281C3</code></td></tr>
-    <tr><td>Platinum project timelock</td><td><code>0xA3edFbFE5eCe298d8E265655688C6f8b38a1a607</code></td></tr>
-    <tr><td>Platinum dead man's switch</td><td><code>0xB974D70059790b0a0C067411b7b83b95fFa5035a</code></td></tr>
-    <tr><td>Test BIGBOT used by Platinum (mock, no value)</td><td><code>0x743da053218445Fc9C10ad1D6a37C901954cE469</code></td></tr>
+    <tr><td>BigBot Platinum</td><td><code>0x54F18236039E84Cf229D06e001f7266d22C2D73c</code></td></tr>
+    <tr><td>Platinum dispenser</td><td><code>0xd17e710CbC5F8c5B8a57A1B19A7EFc2Bbe3F2Fbb</code></td></tr>
+    <tr><td>BB → Platinum 1:1 swap</td><td><code>0xFa338f4ff73470E4d7418Bfe9fe5E2f96Ca38CA5</code></td></tr>
+    <tr><td>Platinum project timelock</td><td><code>0xCBF266c91Df21DA66347D8cCfa753584EA38cfAC</code></td></tr>
+    <tr><td>Platinum dead man's switch</td><td><code>0x2be2D373169dED0CC8433aAD8227493576E0c4F8</code></td></tr>
+    <tr><td>Test BIGBOT used by Platinum (mock, no value)</td><td><code>0xF6380BE95f60Bc2232659f134B4f3186F664e93a</code></td></tr>
   </table>
   <p>Explorer: <a href="https://scan.v4.testnet.pulsechain.com" target="_blank" rel="noopener">PulseChain Testnet V4 explorer</a></p>
   <div class="note warn">Testnet contracts are for testing only. Mainnet addresses for Dispenser v2, the NFTs, BBG and BigBot Platinum don't exist yet. Any address claiming to be one of them should be treated as fake until it appears in an official update of this guide.</div>
