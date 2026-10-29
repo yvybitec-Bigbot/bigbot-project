@@ -1,39 +1,39 @@
 flowchart LR
-  DISP["Dispensador v1
+  DISP["Dispenser v1
 0x430c…C262
-vende BIGBOT por PLS"]
+sells BIGBOT for PLS"]
   VA["Vault Armor Factory v2
 0xE3a6…Ed70
-bóvedas que queman BIGBOT"]
-  POOL["Pool BIGBOT/PLS
+vaults that burn BIGBOT"]
+  POOL["BIGBOT/PLS pool
 PulseX V2"]
   BB(("BIGBOT (BB)
 0xeb6F…CfEf6"))
-  subgraph PLAT["BigBot Platinum · PulseChain mainnet (29 oct 2026)"]
+  subgraph PLAT["BigBot Platinum · PulseChain mainnet (29 Oct 2026)"]
     direction TB
-    PT["Token PLATINUM · 0x2F0D…eDc3
-21.000 fijos, sin dueño"]
+    PT["PLATINUM token · 0x2F0D…eDc3
+fixed 21,000, ownerless"]
     PD["PlatinumDispenser
 0x1902…603e
-16.800 (80 %) por PLS"]
+16,800 (80%) for PLS"]
     SW["BBPlatinumSwap
 0xcCdF…76A4
-3.150 (15 %) por BB"]
+3,150 (15%) for BB"]
     TL["ProjectTimelock
 0xf370…77Cc
-1.050 (5 %), 1 año"]
+1,050 (5%), 1 year"]
     DMS["DeadMansSwitch
 0xaA8b…371f
-herencia"]
+inheritance"]
     PT --> PD
     PT --> SW
     PT --> TL
   end
-  DISP -- "vende" --> BB
-  VA -- "quema" --> BB
-  POOL -- "intercambia" --> BB
-  BB -- "1 BB quemado = 1 PLATINUM" --> SW
-  BB -- "depósito 1 BB + 1 PLATINUM" --> DMS
+  DISP -- "sells" --> BB
+  VA -- "burns" --> BB
+  POOL -- "trades" --> BB
+  BB -- "1 BB burned = 1 PLATINUM" --> SW
+  BB -- "deposit 1 BB + 1 PLATINUM" --> DMS
   classDef core fill:#062a2e,stroke:#3ee6f0,stroke-width:3px,color:#e7e9f7
   classDef plat fill:#1c2033,stroke:#c9d1e8,color:#e7e9f7
   class BB core

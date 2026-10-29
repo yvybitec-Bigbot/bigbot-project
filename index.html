@@ -23,8 +23,8 @@
     <li><a href="#nfts">NFTs: buy, claim, unwrap</a></li>
     <li><a href="#bbg">BBG and its armor vault</a></li>
     <li><a href="#platinum">BigBot Platinum</a></li>
-    <li><a href="#ecosistema">Mapa del ecosistema</a></li>
-    <li><a href="#platinum-seguridad">Platinum: seguridad</a></li>
+    <li><a href="#ecosistema">Ecosystem map</a></li>
+    <li><a href="#platinum-seguridad">Platinum: security</a></li>
     <li><a href="#gui">Part 3: the GUI</a></li>
     <li><a href="#contracts">Contract addresses</a></li>
     <li><a href="#glossary">Glossary</a></li>
@@ -68,7 +68,7 @@
     <tr><td>Vault Armor v2 factory (burn version)</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 27 Sep 2026)</td></tr>
     <tr><td>BIGBOT/PLS pool</td><td><span class="badge b-live">Live</span></td><td>PulseX V2 (since 28 Sep 2026)</td></tr>
     <tr><td>Dispenser v2, 369 NFTs, BBG, BBG armor vault</td><td><span class="badge b-test">Testnet</span></td><td>PulseChain Testnet V4 only (deployed 2 Oct 2026, 51/51 local and 43/43 on-chain tests passed)</td></tr>
-    <tr><td>BigBot Platinum: token, dispenser, BB swap, project timelock, dead man's switch</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 29 Oct 2026; 5 ownerless contracts, 67/67 tests on a mainnet fork). Section in Spanish below.</td></tr>
+    <tr><td>BigBot Platinum: token, dispenser, BB swap, project timelock, dead man's switch</td><td><span class="badge b-live">Live</span></td><td>PulseChain mainnet (since 29 Oct 2026; 5 ownerless contracts, 67/67 tests on a mainnet fork).</td></tr>
     <tr><td>Part 3: the GUI / portal</td><td><span class="badge b-plan">Planned</span></td><td>To be built and tested against Testnet V4 first</td></tr>
   </table>
   <div class="note warn">Nothing from the Testnet, Design or Planned rows exists on mainnet. Testnet tokens have no value. Mainnet launch of those pieces needs final checks and approval first.</div>
@@ -238,121 +238,115 @@
   </ol>
 </section>
 
-<section id="platinum" lang="es">
+<section id="platinum">
   <h2>BigBot Platinum <span class="badge b-live">Live</span></h2>
   <div class="split">
     <div>
-      <p class="sub">Desplegado en <b>PulseChain mainnet (chain ID 369)</b> el 29 oct 2026, entre las 09:41 y las 09:43 (hora de Londres, GMT), bloques 27.920.349 a 27.920.354. Son 5 contratos, todos <b>sin dueño</b> y con el código verificado.</p>
-      <h3>Qué es</h3>
+      <p class="sub">Deployed on <b>PulseChain mainnet (chain ID 369)</b> on 29 Oct 2026, between 09:41 and 09:43 (London time, GMT), blocks 27,920,349 to 27,920,354. There are 5 contracts, all <b>ownerless</b> and with verified code.</p>
+      <h3>What it is</h3>
       <ul>
-        <li><b>PLATINUM es un token ERC20 normal</b> (OpenZeppelin) con <b>suministro fijo de 21.000 PLATINUM</b> y <b>8 decimales</b>, acuñados una sola vez al desplegar.</li>
-        <li><b>Sin dueño, sin mint y sin reglas de transferencia</b>: nadie puede crear más, no hay comisiones ni límites por envío. Se transfiere libremente como cualquier ERC20.</li>
-        <li><b>Reparto inicial:</b> 16.800 (80 %) al dispensador · 3.150 (15 %) al canje con BB · 1.050 (5 %) a un timelock del proyecto.</li>
-        <li><b>Para qué sirve:</b> cada interruptor de hombre muerto (herencia) necesita un depósito de 1 PLATINUM y 1 BB.</li>
+        <li><b>PLATINUM is a standard ERC20 token</b> (OpenZeppelin) with a <b>fixed supply of 21,000 PLATINUM</b> and <b>8 decimals</b>, minted once at deployment.</li>
+        <li><b>No owner, no mint and no transfer rules</b>: nobody can create more, and there are no fees or per-transfer limits. It moves freely like any ERC20.</li>
+        <li><b>Initial distribution:</b> 16,800 (80%) to the dispenser · 3,150 (15%) to the BB swap · 1,050 (5%) to a project timelock.</li>
+        <li><b>What it's for:</b> every dead man's switch (inheritance) needs a deposit of 1 PLATINUM and 1 BB.</li>
       </ul>
     </div>
     <figure class="media">
-      <img src="assets/platinum-coin.jpg" alt="Moneda BigBot Platinum (arte conceptual)">
-      <figcaption>Arte conceptual de la moneda Platinum</figcaption>
+      <img src="assets/illustrations/platinum-coin.jpg" alt="BigBot Platinum coin (concept art)">
+      <figcaption>Concept art of the Platinum coin</figcaption>
     </figure>
   </div>
 
-  <h3>Contratos en PulseChain mainnet (chain ID 369)</h3>
+  <h3>Contracts on PulseChain mainnet (chain ID 369)</h3>
   <table>
-    <tr><th>Contrato</th><th>Dirección (abre el explorador)</th><th>Qué hace</th></tr>
-        <tr><td>BigBotPlatinum (token PLATINUM)</td><td><a href="https://scan.pulsechain.com/address/0x2F0D39dF0Fdfe218402E3Ac32076dFe72Eb7eDc3" target="_blank" rel="noopener"><code>0x2F0D39dF0Fdfe218402E3Ac32076dFe72Eb7eDc3</code></a></td><td>ERC20 normal, 21.000 PLATINUM fijos, 8 decimales.</td></tr>
-        <tr><td>PlatinumDispenser</td><td><a href="https://scan.pulsechain.com/address/0x1902fDFB7AdC3452f33cA4a77e7eDd2d7385603e" target="_blank" rel="noopener"><code>0x1902fDFB7AdC3452f33cA4a77e7eDd2d7385603e</code></a></td><td>Vende 16.800 PLATINUM a precio fijo por PLS.</td></tr>
-        <tr><td>BBPlatinumSwap</td><td><a href="https://scan.pulsechain.com/address/0xcCdFEe64F907cB22D80889669E002A0419C676A4" target="_blank" rel="noopener"><code>0xcCdFEe64F907cB22D80889669E002A0419C676A4</code></a></td><td>Canje 1 BB → 1 PLATINUM (3.150 PLATINUM).</td></tr>
-        <tr><td>ProjectTimelock</td><td><a href="https://scan.pulsechain.com/address/0xf370EDE9a6942557BDFa5A682e8B1C67D87377Cc" target="_blank" rel="noopener"><code>0xf370EDE9a6942557BDFa5A682e8B1C67D87377Cc</code></a></td><td>1.050 PLATINUM (5 %) bloqueados 365 días.</td></tr>
-        <tr><td>DeadMansSwitch</td><td><a href="https://scan.pulsechain.com/address/0xaA8b0D475Ccf55361A1dcD1fa7BCc61D317c371f" target="_blank" rel="noopener"><code>0xaA8b0D475Ccf55361A1dcD1fa7BCc61D317c371f</code></a></td><td>Interruptor de hombre muerto (herencia).</td></tr>
+    <tr><th>Contract</th><th>Address (opens the explorer)</th><th>What it does</th></tr>
+        <tr><td>BigBotPlatinum (PLATINUM token)</td><td><a href="https://scan.pulsechain.com/address/0x2F0D39dF0Fdfe218402E3Ac32076dFe72Eb7eDc3" target="_blank" rel="noopener"><code>0x2F0D39dF0Fdfe218402E3Ac32076dFe72Eb7eDc3</code></a></td><td>Standard ERC20, fixed 21,000 PLATINUM, 8 decimals.</td></tr>
+        <tr><td>PlatinumDispenser</td><td><a href="https://scan.pulsechain.com/address/0x1902fDFB7AdC3452f33cA4a77e7eDd2d7385603e" target="_blank" rel="noopener"><code>0x1902fDFB7AdC3452f33cA4a77e7eDd2d7385603e</code></a></td><td>Sells 16,800 PLATINUM at a fixed price in PLS.</td></tr>
+        <tr><td>BBPlatinumSwap</td><td><a href="https://scan.pulsechain.com/address/0xcCdFEe64F907cB22D80889669E002A0419C676A4" target="_blank" rel="noopener"><code>0xcCdFEe64F907cB22D80889669E002A0419C676A4</code></a></td><td>Swaps 1 BB → 1 PLATINUM (3,150 PLATINUM).</td></tr>
+        <tr><td>ProjectTimelock</td><td><a href="https://scan.pulsechain.com/address/0xf370EDE9a6942557BDFa5A682e8B1C67D87377Cc" target="_blank" rel="noopener"><code>0xf370EDE9a6942557BDFa5A682e8B1C67D87377Cc</code></a></td><td>1,050 PLATINUM (5%) locked for 365 days.</td></tr>
+        <tr><td>DeadMansSwitch</td><td><a href="https://scan.pulsechain.com/address/0xaA8b0D475Ccf55361A1dcD1fa7BCc61D317c371f" target="_blank" rel="noopener"><code>0xaA8b0D475Ccf55361A1dcD1fa7BCc61D317c371f</code></a></td><td>Dead man's switch (inheritance).</td></tr>
   </table>
-  <div class="note">Comprueba siempre la dirección completa antes de interactuar. Cualquier otro contrato que diga ser "BigBot Platinum" es falso.</div>
+  <div class="note">Always check the full address before interacting. Any other contract claiming to be "BigBot Platinum" is fake.</div>
 
-  <h3>El dispensador: 1 PLATINUM = 1.000.000 PLS</h3>
+  <h3>The dispenser: 1 PLATINUM = 1,000,000 PLS</h3>
   <ul>
-    <li>Precio fijo, sin subidas. Hay <b>16.800 PLATINUM</b> a la venta. Se admiten fracciones (mínimo 0,00000001 PLATINUM = 0,01 PLS).</li>
-    <li><b>A dónde va tu PLS:</b> de cada pago, el <b>50 % se envía a la dirección muerta</b> <code>0x000000000000000000000000000000000000dEaD</code> en la misma transacción, y el otro <b>50 % queda bloqueado para siempre</b> dentro del dispensador.</li>
-    <li>El contrato <b>no tiene función de retirada</b> (ni de PLS ni de tokens), ni dueño, ni es actualizable: nadie, tampoco el equipo, puede sacar ese PLS nunca.</li>
+    <li>Fixed price, no increases. <b>16,800 PLATINUM</b> are for sale. Fractions are allowed (minimum 0.00000001 PLATINUM = 0.01 PLS).</li>
+    <li><b>Where your PLS goes:</b> of every payment, <b>50% is sent to the dead address</b> <code>0x000000000000000000000000000000000000dEaD</code> in the same transaction, and the other <b>50% stays locked forever</b> inside the dispenser.</li>
+    <li>The contract has <b>no withdraw function</b> (neither for PLS nor for tokens), no owner and is not upgradeable: nobody, not even the team, can ever take that PLS out.</li>
   </ul>
 
-  <h3>Canje BB → PLATINUM (1 a 1)</h3>
-  <p>Envías BB al contrato <b>BBPlatinumSwap</b> y recibes la misma cantidad de PLATINUM: <b>1 BB = 1 PLATINUM</b>, hasta agotar los <b>3.150 PLATINUM</b>. Los BB recibidos van directamente a la dirección muerta <code>0x…dEaD</code>, así que cada canje reduce el suministro de BIGBOT. Primero das <i>approve</i> de tus BB al contrato y después llamas a <code>swap()</code>.</p>
+  <h3>BB → PLATINUM swap (1 to 1)</h3>
+  <p>You send BB to the <b>BBPlatinumSwap</b> contract and receive the same amount of PLATINUM: <b>1 BB = 1 PLATINUM</b>, until the <b>3,150 PLATINUM</b> run out. The BB received go straight to the dead address <code>0x…dEaD</code>, so every swap reduces the BIGBOT supply. First you <i>approve</i> your BB for the contract, then you call <code>swap()</code>.</p>
       <figure class="diagram">
-        <!-- Diagrama Mermaid pre-renderizado con mermaid-cli. Fuente: assets/diagrams/platinum-swap.mmd -->
-        <img src="assets/diagrams/diagram-platinum-swap.svg" alt="Diagrama: envías 1 BB al BBPlatinumSwap, el BB va a la dirección muerta y recibes 1 PLATINUM" loading="lazy">
-        <figcaption>Canje: 1 BB entra, se quema, y sale 1 PLATINUM</figcaption>
+        <!-- Mermaid diagram pre-rendered with mermaid-cli. Source: assets/diagrams/platinum-swap.mmd -->
+        <img src="assets/diagrams/diagram-platinum-swap.svg" alt="Diagram: you send 1 BB to BBPlatinumSwap, the BB goes to the dead address and you receive 1 PLATINUM" loading="lazy">
+        <figcaption>Swap: 1 BB goes in, gets burned, and 1 PLATINUM comes out</figcaption>
       </figure>
-      <!-- ILUSTRACIÓN IA (opcional, pendiente de Carlos): Ilustración del canje BB → Platinum
       <figure class="media illus">
-        <img src="assets/ilustracion-canje.jpg" alt="Ilustración del canje BB → Platinum">
-        <figcaption>Ilustración del canje BB → Platinum</figcaption>
+        <img src="assets/illustrations/ilustracion-canje.webp" alt="Illustration of the swap: a BigBot coin goes into a slot, a Platinum coin comes out (1 BB = 1 Platinum) and the BB falls into the fire of the dead address forever" width="758" height="1032" loading="lazy">
+        <figcaption>Illustration: every BB you swap is burned forever and you get 1 PLATINUM in return</figcaption>
       </figure>
-      -->
 
-  <h3>Timelock del proyecto (5 %)</h3>
-  <p>El contrato <b>ProjectTimelock</b> guarda <b>1.050 PLATINUM</b> (5 %) bloqueados <b>365 días</b>. A partir del <b>29 oct 2027</b> (09:42:55 UTC) cualquiera puede llamar a <code>release()</code>, pero los tokens <b>solo pueden ir</b> a la dirección del proyecto <a href="https://scan.pulsechain.com/address/0xB35b673031576d7a95Df5C6F94639A7dD1A0Bfa4" target="_blank" rel="noopener"><code>0xB35b673031576d7a95Df5C6F94639A7dD1A0Bfa4</code></a>. Antes de esa fecha no se pueden mover.</p>
+  <h3>Project timelock (5%)</h3>
+  <p>The <b>ProjectTimelock</b> contract holds <b>1,050 PLATINUM</b> (5%) locked for <b>365 days</b>. From <b>29 Oct 2027</b> (09:42:55 UTC) anyone can call <code>release()</code>, but the tokens <b>can only go</b> to the project address <a href="https://scan.pulsechain.com/address/0xB35b673031576d7a95Df5C6F94639A7dD1A0Bfa4" target="_blank" rel="noopener"><code>0xB35b673031576d7a95Df5C6F94639A7dD1A0Bfa4</code></a>. Before that date they cannot be moved.</p>
 
-  <h3>El interruptor de hombre muerto (herencia)</h3>
-  <p>Una herencia sencilla para tu wallet: si dejas de dar señales de vida durante el plazo que elijas, tus tokens protegidos pasan a la wallet de tu heredero. Tus tokens <b>siguen en tu wallet</b> hasta ese momento.</p>
+  <h3>The dead man's switch (inheritance)</h3>
+  <p>A simple inheritance for your wallet: if you stop giving signs of life for the period you choose, your protected tokens move to your heir's wallet. Your tokens <b>stay in your wallet</b> until then.</p>
       <figure class="diagram">
-        <!-- Diagrama Mermaid pre-renderizado con mermaid-cli. Fuente: assets/diagrams/platinum-switch.mmd -->
-        <img src="assets/diagrams/diagram-platinum-switch.svg" alt="Diagrama: 1 armar, 2 latido, 3 disparo y espera de 369 bloques, 4 liberación al heredero" loading="lazy">
-        <figcaption>El interruptor en 4 pasos</figcaption>
+        <!-- Mermaid diagram pre-rendered with mermaid-cli. Source: assets/diagrams/platinum-switch.mmd -->
+        <img src="assets/diagrams/diagram-platinum-switch.svg" alt="Diagram: 1 arm, 2 heartbeat, 3 trigger and a 369-block wait, 4 release to the heir" loading="lazy">
+        <figcaption>The switch in 4 steps</figcaption>
       </figure>
-      <!-- ILUSTRACIÓN IA (opcional, pendiente de Carlos): Ilustración del interruptor de hombre muerto
       <figure class="media illus">
-        <img src="assets/ilustracion-interruptor.jpg" alt="Ilustración del interruptor de hombre muerto">
-        <figcaption>Ilustración del interruptor de hombre muerto</figcaption>
+        <img src="assets/illustrations/ilustracion-interruptor.webp" alt="Illustration of the dead man's switch in 4 steps: 1 activate with 1 BB + 1 Platinum, 2 send a regular sign of life, 3 if it stops, the countdown starts, 4 the tokens go to the heir's wallet" width="770" height="1154" loading="lazy">
+        <figcaption>Illustration: the dead man's switch in 4 steps</figcaption>
       </figure>
-      -->
   <ol class="steps">
-    <li><b>Armar:</b> depositas <b>1 BB y 1 PLATINUM</b> en el contrato, eliges la wallet heredera (puede estar vacía), el plazo (<b>entre 90 y 3.650 días</b>) y los tokens a proteger, y das <i>approve</i> al contrato de esos tokens. El heredero, el plazo y la lista quedan fijados: no se pueden cambiar y no hay función de desarme. <b>Un solo interruptor por wallet, para siempre</b>: esa wallet no puede volver a armar otro, ni siquiera después de la liberación.</li>
-    <li><b>Latido:</b> <code>heartbeat()</code> reinicia el contador. Mientras des señales de vida antes de que venza el plazo, no pasa nada. <b>Usa un gas limit de 50.000 o más</b> (la estimación automática de la wallet puede quedarse corta).</li>
-    <li><b>Disparo:</b> si vence el plazo sin latido, <b>cualquiera</b> puede llamar a <code>trigger()</code>, que anota el bloque. Desde ese momento <b>no se puede detener</b>: el latido ya no funciona.</li>
-    <li><b>Liberación:</b> tras <b>369 bloques</b> (aprox. una hora), cualquiera llama a <code>release()</code> y en una sola transacción: el BB depositado va a la dirección muerta, los tokens protegidos que sigan en tu wallet (hasta lo aprobado) pasan al heredero, y el PLATINUM depositado se envía al heredero.</li>
+    <li><b>Arm:</b> you deposit <b>1 BB and 1 PLATINUM</b> in the contract, choose the heir wallet (it can be empty), the period (<b>between 90 and 3,650 days</b>) and the tokens to protect, and <i>approve</i> those tokens for the contract. The heir, the period and the list are fixed: they cannot be changed and there is no disarm function. <b>One switch per wallet, forever</b>: that wallet can never arm another one, not even after the release.</li>
+    <li><b>Heartbeat:</b> <code>heartbeat()</code> resets the timer. As long as you give a sign of life before the period runs out, nothing happens. <b>Use a gas limit of 50,000 or more</b> (the wallet's automatic estimate can fall short).</li>
+    <li><b>Trigger:</b> if the period runs out with no heartbeat, <b>anyone</b> can call <code>trigger()</code>, which records the block. From that moment it <b>cannot be stopped</b>: the heartbeat no longer works.</li>
+    <li><b>Release:</b> after <b>369 blocks</b> (about an hour), anyone calls <code>release()</code> and, in a single transaction: the deposited BB goes to the dead address, the protected tokens still in your wallet (up to the approved amount) move to the heir, and the deposited PLATINUM is sent to the heir.</li>
   </ol>
-  <h4>Solo se pueden proteger estos 10 tokens</h4>
-  <p class="sub">La lista está fijada en el contrato y no se puede ampliar. Hay dos WBTC y dos DAI con el mismo símbolo: distínguelos por la dirección.</p>
+  <h4>Only these 10 tokens can be protected</h4>
+  <p class="sub">The list is fixed in the contract and cannot be extended. There are two WBTC and two DAI with the same symbol: tell them apart by the address.</p>
   <table>
-    <tr><th>#</th><th>Token</th><th>Qué es</th><th>Dirección</th></tr>
-        <tr><td>1</td><td><b>WPLS</b></td><td>Wrapped Pulse (el PLS hay que envolverlo en WPLS)</td><td><a href="https://scan.pulsechain.com/address/0xA1077a294dDE1B09bB078844df40758a5D0f9a27" target="_blank" rel="noopener"><code>0xA1077a294dDE1B09bB078844df40758a5D0f9a27</code></a></td></tr>
+    <tr><th>#</th><th>Token</th><th>What it is</th><th>Address</th></tr>
+        <tr><td>1</td><td><b>WPLS</b></td><td>Wrapped Pulse (PLS has to be wrapped into WPLS)</td><td><a href="https://scan.pulsechain.com/address/0xA1077a294dDE1B09bB078844df40758a5D0f9a27" target="_blank" rel="noopener"><code>0xA1077a294dDE1B09bB078844df40758a5D0f9a27</code></a></td></tr>
         <tr><td>2</td><td><b>PLSX</b></td><td>PulseX</td><td><a href="https://scan.pulsechain.com/address/0x95B303987A60C71504D99Aa1b13B4DA07b0790ab" target="_blank" rel="noopener"><code>0x95B303987A60C71504D99Aa1b13B4DA07b0790ab</code></a></td></tr>
         <tr><td>3</td><td><b>HEX</b></td><td>HEX</td><td><a href="https://scan.pulsechain.com/address/0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39" target="_blank" rel="noopener"><code>0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39</code></a></td></tr>
         <tr><td>4</td><td><b>PRVX</b></td><td>ProveX</td><td><a href="https://scan.pulsechain.com/address/0xF6f8Db0aBa00007681F8fAF16A0FDa1c9B030b11" target="_blank" rel="noopener"><code>0xF6f8Db0aBa00007681F8fAF16A0FDa1c9B030b11</code></a></td></tr>
-        <tr><td>5</td><td><b>pWBTC</b></td><td>Wrapped BTC, copia del fork (símbolo on-chain WBTC)</td><td><a href="https://scan.pulsechain.com/address/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599" target="_blank" rel="noopener"><code>0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599</code></a></td></tr>
-        <tr><td>6</td><td><b>WBTC</b></td><td>Wrapped BTC desde Ethereum (puente)</td><td><a href="https://scan.pulsechain.com/address/0xb17D901469B9208B17d916112988A3FeD19b5cA1" target="_blank" rel="noopener"><code>0xb17D901469B9208B17d916112988A3FeD19b5cA1</code></a></td></tr>
-        <tr><td>7</td><td><b>DAI</b></td><td>Dai desde Ethereum (puente)</td><td><a href="https://scan.pulsechain.com/address/0xefD766cCb38EaF1dfd701853BFCe31359239F305" target="_blank" rel="noopener"><code>0xefD766cCb38EaF1dfd701853BFCe31359239F305</code></a></td></tr>
-        <tr><td>8</td><td><b>pDAI</b></td><td>Dai, copia del fork (símbolo on-chain DAI)</td><td><a href="https://scan.pulsechain.com/address/0x6B175474E89094C44Da98b954EedeAC495271d0F" target="_blank" rel="noopener"><code>0x6B175474E89094C44Da98b954EedeAC495271d0F</code></a></td></tr>
-        <tr><td>9</td><td><b>USDC</b></td><td>USD Coin desde Ethereum (puente)</td><td><a href="https://scan.pulsechain.com/address/0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07" target="_blank" rel="noopener"><code>0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07</code></a></td></tr>
-        <tr><td>10</td><td><b>USDT</b></td><td>Tether USD desde Ethereum (puente)</td><td><a href="https://scan.pulsechain.com/address/0x0Cb6F5a34ad42ec934882A05265A7d5F59b51A2f" target="_blank" rel="noopener"><code>0x0Cb6F5a34ad42ec934882A05265A7d5F59b51A2f</code></a></td></tr>
+        <tr><td>5</td><td><b>pWBTC</b></td><td>Wrapped BTC, fork copy (on-chain symbol WBTC)</td><td><a href="https://scan.pulsechain.com/address/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599" target="_blank" rel="noopener"><code>0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599</code></a></td></tr>
+        <tr><td>6</td><td><b>WBTC</b></td><td>Wrapped BTC from Ethereum (bridged)</td><td><a href="https://scan.pulsechain.com/address/0xb17D901469B9208B17d916112988A3FeD19b5cA1" target="_blank" rel="noopener"><code>0xb17D901469B9208B17d916112988A3FeD19b5cA1</code></a></td></tr>
+        <tr><td>7</td><td><b>DAI</b></td><td>Dai from Ethereum (bridged)</td><td><a href="https://scan.pulsechain.com/address/0xefD766cCb38EaF1dfd701853BFCe31359239F305" target="_blank" rel="noopener"><code>0xefD766cCb38EaF1dfd701853BFCe31359239F305</code></a></td></tr>
+        <tr><td>8</td><td><b>pDAI</b></td><td>Dai, fork copy (on-chain symbol DAI)</td><td><a href="https://scan.pulsechain.com/address/0x6B175474E89094C44Da98b954EedeAC495271d0F" target="_blank" rel="noopener"><code>0x6B175474E89094C44Da98b954EedeAC495271d0F</code></a></td></tr>
+        <tr><td>9</td><td><b>USDC</b></td><td>USD Coin from Ethereum (bridged)</td><td><a href="https://scan.pulsechain.com/address/0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07" target="_blank" rel="noopener"><code>0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07</code></a></td></tr>
+        <tr><td>10</td><td><b>USDT</b></td><td>Tether USD from Ethereum (bridged)</td><td><a href="https://scan.pulsechain.com/address/0x0Cb6F5a34ad42ec934882A05265A7d5F59b51A2f" target="_blank" rel="noopener"><code>0x0Cb6F5a34ad42ec934882A05265A7d5F59b51A2f</code></a></td></tr>
   </table>
-  <div class="note warn"><b>Limitaciones, con claridad:</b> el <b>PLS nativo no se protege</b>: envuélvelo antes en <b>WPLS</b>. Es un sistema de permisos, no una caja fuerte: si revocas un approve o vacías la wallet, no hay nada que mover. Si te roban la clave, el ladrón también puede dar latidos. <b>Si un token falla al transferirse, se salta y se queda en tu wallet</b>; el resto de la liberación continúa. El propio PLATINUM no se puede proteger, y el heredero no puede ser tu propia wallet ni la dirección muerta. Para <code>release()</code> usa la estimación de gas: con gas insuficiente revierte entera.</div>
+  <div class="note warn"><b>Limitations, plainly:</b> <b>native PLS is not protected</b>: wrap it into <b>WPLS</b> first. This is a permission system, not a safe: if you revoke an approve or empty the wallet, there is nothing to move. If your key is stolen, the thief can also send heartbeats. <b>If a token fails to transfer, it is skipped and stays in your wallet</b>; the rest of the release goes ahead. PLATINUM itself cannot be protected, and the heir cannot be your own wallet or the dead address. For <code>release()</code> use the gas estimate: with too little gas it reverts entirely.</div>
 
-  <h3 id="ecosistema">Mapa del ecosistema</h3>
-  <p>BIGBOT en el centro: lo que ya estaba en mainnet a la izquierda y la suite Platinum a la derecha.</p>
+  <h3 id="ecosistema">Ecosystem map</h3>
+  <p>BIGBOT in the centre: what was already on mainnet on the left, and the Platinum suite on the right.</p>
       <figure class="diagram">
-        <!-- Diagrama Mermaid pre-renderizado con mermaid-cli. Fuente: assets/diagrams/ecosystem.mmd -->
-        <img src="assets/diagrams/diagram-ecosystem.svg" alt="Mapa: BIGBOT en el centro, conectado con el dispensador v1, la Vault Armor Factory v2, el pool BIGBOT/PLS y los 5 contratos de BigBot Platinum" loading="lazy">
-        <figcaption>Mapa del ecosistema BigBot en PulseChain mainnet</figcaption>
+        <!-- Mermaid diagram pre-rendered with mermaid-cli. Source: assets/diagrams/ecosystem.mmd -->
+        <img src="assets/diagrams/diagram-ecosystem.svg" alt="Map: BIGBOT in the centre, connected to dispenser v1, Vault Armor Factory v2, the BIGBOT/PLS pool and the 5 BigBot Platinum contracts" loading="lazy">
+        <figcaption>Map of the BigBot ecosystem on PulseChain mainnet</figcaption>
       </figure>
-      <!-- ILUSTRACIÓN IA (opcional, pendiente de Carlos): Ilustración del ecosistema BigBot
       <figure class="media illus">
-        <img src="assets/ilustracion-ecosistema.jpg" alt="Ilustración del ecosistema BigBot">
-        <figcaption>Ilustración del ecosistema BigBot</figcaption>
+        <img src="assets/illustrations/ilustracion-ecosistema.webp" alt="Illustration of the BigBot ecosystem: a robotic core in the centre surrounded by BigBot, the dispenser, Vault Armor, the airdrop, Platinum and the dead man's switch" width="764" height="1114" loading="lazy">
+        <figcaption>Illustration: the pieces of the BigBot ecosystem around its core</figcaption>
       </figure>
-      -->
-  <p class="sub">BigBot Gold (BBG), las NFT 369 y el dispensador v2 siguen <b>solo en testnet</b> y por eso no aparecen en el mapa de mainnet.</p>
+  <p class="sub">BigBot Gold (BBG), the 369 NFTs and dispenser v2 are still <b>testnet only</b>, so they don't appear on the mainnet map.</p>
 
-  <h3 id="platinum-seguridad">Seguridad y revisión</h3>
+  <h3 id="platinum-seguridad">Security and review</h3>
   <ul>
-    <li>La revisión externa del código la hizo <b>Grok</b> (IA). No encontró problemas críticos ni altos; las mejoras que propuso se aplicaron antes del despliegue (entre ellas, un límite de gas por token en <code>release()</code>).</li>
-    <li><b>67 tests pasan</b> sobre una copia (fork) de PulseChain mainnet, incluidos tests con los 10 tokens reales.</li>
-    <li><b>Código verificado</b>: los 5 contratos coinciden en <b>Sourcify</b> (coincidencia parcial: el bytecode es idéntico y solo difiere el hash de metadatos). En PulseScan, BigBotPlatinum ya aparece verificado y los otros 4 estaban en cola de verificación al publicar esta página.</li>
-    <li><b>Ningún contrato tiene dueño</b> (<code>owner()</code> no existe): sin pausa, sin mint, sin retiradas y sin actualizaciones. La única dirección con un permiso es la beneficiaria del timelock, y solo para recibir los 1.050 PLATINUM a partir del 29 oct 2027.</li>
-    <li><b>No hay auditoría de una empresa profesional.</b> Úsalo sabiendo que todo es inmutable: un error después del despliegue no se puede corregir sin desplegar contratos nuevos.</li>
+    <li>The external code review was done by <b>Grok</b> (AI). It found no critical or high issues; the improvements it suggested were applied before deployment (among them, a per-token gas limit in <code>release()</code>).</li>
+    <li><b>67 tests pass</b> on a copy (fork) of PulseChain mainnet, including tests with the 10 real tokens.</li>
+    <li><b>Verified code</b>: all 5 contracts match on <b>Sourcify</b> (partial match: the bytecode is identical and only the metadata hash differs). On PulseScan, BigBotPlatinum already shows as verified and the other 4 were in the verification queue when this page was published.</li>
+    <li><b>No contract has an owner</b> (<code>owner()</code> does not exist): no pause, no mint, no withdrawals and no upgrades. The only address with any permission is the timelock beneficiary, and only to receive the 1,050 PLATINUM from 29 Oct 2027.</li>
+    <li><b>There is no audit by a professional firm.</b> Use it knowing that everything is immutable: a bug after deployment cannot be fixed without deploying new contracts.</li>
   </ul>
   <table>
-    <tr><th>Contrato</th><th>Código verificado</th></tr>
+    <tr><th>Contract</th><th>Verified code</th></tr>
         <tr><td>BigBotPlatinum</td><td><a href="https://repo.sourcify.dev/369/0x2F0D39dF0Fdfe218402E3Ac32076dFe72Eb7eDc3" target="_blank" rel="noopener">Sourcify</a> · <a href="https://scan.pulsechain.com/address/0x2F0D39dF0Fdfe218402E3Ac32076dFe72Eb7eDc3" target="_blank" rel="noopener">PulseScan</a></td></tr>
         <tr><td>PlatinumDispenser</td><td><a href="https://repo.sourcify.dev/369/0x1902fDFB7AdC3452f33cA4a77e7eDd2d7385603e" target="_blank" rel="noopener">Sourcify</a> · <a href="https://scan.pulsechain.com/address/0x1902fDFB7AdC3452f33cA4a77e7eDd2d7385603e" target="_blank" rel="noopener">PulseScan</a></td></tr>
         <tr><td>BBPlatinumSwap</td><td><a href="https://repo.sourcify.dev/369/0xcCdFEe64F907cB22D80889669E002A0419C676A4" target="_blank" rel="noopener">Sourcify</a> · <a href="https://scan.pulsechain.com/address/0xcCdFEe64F907cB22D80889669E002A0419C676A4" target="_blank" rel="noopener">PulseScan</a></td></tr>
