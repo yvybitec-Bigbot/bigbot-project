@@ -76,3 +76,9 @@ footer{padding:26px 0;color:var(--muted);font-size:.85rem}
   main{padding:0 18px 40px}
   header.hero,.split,.cols{grid-template-columns:1fr}
 }
+/* diagrams (Mermaid, pre-rendered to SVG) */
+.diagram{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;margin:16px 0;text-align:center}
+.diagram img{max-width:100%;height:auto;display:inline-block}
+.diagram figcaption{font-size:.8rem;color:var(--muted);margin-top:6px}
+section h4{font-size:1rem;margin:18px 0 4px}
+.diagram img[src*="platinum-switch"]{max-width:520px}

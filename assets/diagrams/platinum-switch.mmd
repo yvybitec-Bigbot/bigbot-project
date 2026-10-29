@@ -1,0 +1,28 @@
+flowchart TD
+  A["1. ARMAR
+Depositas 1 BB + 1 PLATINUM,
+eliges heredero y plazo (90 a 3.650 días)
+y das approve a los tokens a proteger"]
+  B["2. LATIDO
+heartbeat() reinicia el plazo
+(gas limit de 50.000 o más)"]
+  C["3. DISPARO
+Vence el plazo sin latido:
+cualquiera llama a trigger()
+y empieza la espera de 369 bloques"]
+  R["4. LIBERACIÓN
+Tras 369 bloques (aprox. 1 hora),
+release() mueve los tokens protegidos
+de tu wallet al heredero"]
+  A --> B
+  B -- "sigues vivo: repites el latido" --> B
+  B -- "no hay latido a tiempo" --> C
+  C -- "ya no se puede detener" --> R
+  classDef arm fill:#0f2232,stroke:#5dade2,color:#e7e9f7
+  classDef ok fill:#0f2a1b,stroke:#2ecc71,color:#e7e9f7
+  classDef warn fill:#2c1d05,stroke:#f39c12,color:#e7e9f7
+  classDef end1 fill:#1d1838,stroke:#e65bf0,color:#e7e9f7
+  class A arm
+  class B ok
+  class C warn
+  class R end1

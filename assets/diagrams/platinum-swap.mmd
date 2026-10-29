@@ -1,0 +1,15 @@
+flowchart LR
+  U["Tu wallet"]
+  S["BBPlatinumSwap
+0xcCdF…76A4
+(3.150 PLATINUM)"]
+  D["Dirección muerta
+0x…dEaD
+(BB quemado)"]
+  U -- "1. envías 1 BB" --> S
+  S -- "2. el BB va a la dirección muerta" --> D
+  S -- "3. recibes 1 PLATINUM" --> U
+  classDef wallet fill:#0f2a1b,stroke:#2ecc71,color:#e7e9f7
+  classDef dead fill:#2c1d05,stroke:#f39c12,color:#e7e9f7
+  class U wallet
+  class D dead
