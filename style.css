@@ -85,3 +85,12 @@ section h4{font-size:1rem;margin:18px 0 4px}
 .media.illus{text-align:center;margin:16px 0}
 .media.illus img{max-width:420px;height:auto;margin:0 auto}
 .site-banner{display:block;width:100%;max-width:100%;height:auto;margin:24px 0 0;border-radius:14px;border:1px solid var(--line)}
+/* responsive fixes: keep main column inside the viewport */
+.layout{grid-template-columns:250px minmax(0,1fr)}
+main{min-width:0;width:100%;box-sizing:border-box}
+main img,main video,main svg{max-width:100%}
+.media.illus img{width:100%;max-width:420px}
+table{display:block;overflow-x:auto;max-width:100%}
+pre{overflow-x:auto;max-width:100%}
+html,body{overflow-x:hidden}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
